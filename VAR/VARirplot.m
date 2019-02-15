@@ -31,7 +31,8 @@ end
 %% Retrieve and initialize variables 
 %================================================
 filename = [VARopt.figname 'IRF_'];
-quality = VARopt.quality;
+quality  = VARopt.quality;
+savefigs = VARopt.savefigs;
 suptitle = VARopt.suptitle;
 pick = VARopt.pick;
 
@@ -50,8 +51,8 @@ else
 end
 
 % Define the rows and columns for the subplots
-row = round(sqrt(nvars));
-col = ceil(sqrt(nvars));
+row = 1;        % round(sqrt(nvars));
+col = nvars;    % ceil(sqrt(nvars));
 
 % Define a timeline
 steps = 1:1:nsteps;
@@ -60,8 +61,10 @@ x_axis = zeros(1,nsteps);
 
 %% Plot
 %================================================
-FigSize
-for jj=pick:nshocks                
+
+for jj=pick:nshocks           
+    disp(['Impulse response to ' vnames{jj}])
+    figure; FigSize(40,10)
     for ii=1:nvars
         subplot(row,col,ii);
         plot(steps,IRF(:,ii,jj),'LineStyle','-','Color',[0.01 0.09 0.44],'LineWidth',2);
@@ -75,20 +78,21 @@ for jj=pick:nshocks
         xlim([1 nsteps]);
         title([vnames{ii} ' to ' vnames{jj}], 'FontWeight','bold','FontSize',10); 
     end
-    % Save
-    FigName = [filename num2str(jj)];
-    if quality 
-        if suptitle==1
-            Alphabet = char('a'+(1:nshocks)-1);
-            SupTitle([Alphabet(jj) ') IRF to a shock to '  vnames{jj}])
+    
+    if savefigs
+        % Save
+        FigName = [filename num2str(jj)];
+        if quality
+            if suptitle==1
+                Alphabet = char('a'+(1:nshocks)-1);
+                SupTitle([Alphabet(jj) ') IRF to a shock to '  vnames{jj}])
+            end
+            set(gcf, 'Color', 'w');
+            export_fig(FigName,'-pdf','-png','-painters')
+        else
+            print('-dpng','-r100',FigName);
+            orient landscape
+            print('-dpdf','-bestfit','-r100',FigName);
         end
-        set(gcf, 'Color', 'w');
-        export_fig(FigName,'-pdf','-png','-painters')
-    else
-        print('-dpng','-r100',FigName);
-        print('-dpdf','-r100',FigName);
     end
-    clf('reset');
 end
-
-close all
