@@ -63,7 +63,7 @@ x_axis = zeros(1,nsteps);
 
 %% Plot
 %================================================
-FigSize
+
 for ii=pick:nvars
     disp(['Variance decomposition of ' vnames{ii}])
     figure; FigSize(40,10)

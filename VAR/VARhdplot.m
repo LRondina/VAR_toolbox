@@ -49,7 +49,7 @@ end
 
 %% Plot
 %===============================================
-FigSize
+
 for ii=pick:nvars                
     disp(['Historical decomposition of ' vnames{ii}])
     figure; FigSize(40,15)
