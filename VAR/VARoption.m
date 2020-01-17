@@ -22,3 +22,4 @@ VARopt.suptitle  = 0;     % title on top of figures (Figure Toolbox required)
 VARopt.firstdate = [];    % initial date of the sample in format 1999.75 => 1999Q4 (both for annual and quarterly data)
 VARopt.frequency = 'q';   % frequency of the data 'q' quarterly, 'y' annual
 VARopt.figname   = [];    % string for figure name
+VARopt.savefigs  = false; % string indicate not saving fig as default
