@@ -71,8 +71,8 @@ for jj=pick:nshocks
     for ii=1:nvars
         subplot(row,col,ii);
         if exist('INF','var') && exist('SUP','var')
-            %shadedplot(steps,INF(:,ii,jj)',SUP(:,ii,jj)',[0.7 0.7 0.7],[0.7 0.7 0.7] ); %ÒõÓ°²¿·ÖĞèÒªÏÈ»­£¬²»È»»á¸²¸ÇºóÃæ»­µÄÇúÏß
-            shadedplot(steps,INF(:,ii,jj)',SUP(:,ii,jj)',[0.8 0.8 0.95],[0.75 0.75 0.95] ); %ÒõÓ°²¿·ÖĞèÒªÏÈ»­£¬²»È»»á¸²¸ÇºóÃæ»­µÄÇúÏß
+            %shadedplot(steps,INF(:,ii,jj)',SUP(:,ii,jj)',[0.7 0.7 0.7],[0.7 0.7 0.7] ); %é˜´å½±éƒ¨åˆ†éœ€è¦å…ˆç”»ï¼Œä¸ç„¶ä¼šè¦†ç›–åé¢ç”»çš„æ›²çº¿
+            shadedplot(steps,INF(:,ii,jj)',SUP(:,ii,jj)',[0.8 0.8 0.95],[0.75 0.75 0.95] ); %é˜´å½±éƒ¨åˆ†éœ€è¦å…ˆç”»ï¼Œä¸ç„¶ä¼šè¦†ç›–åé¢ç”»çš„æ›²çº¿
             hold on
             plot(steps,INF(:,ii,jj),'LineStyle',':','Color',[0.39 0.58 0.93],'LineWidth',1.5);
             hold on
@@ -85,13 +85,14 @@ for jj=pick:nshocks
         xlim([1 nsteps]);
         title([vnames{ii} ' to ' vnames{jj}], 'FontWeight','bold','FontSize',14); 
         grid on;
-        if mod(ii,3)==0
+    % new line to make tight plot
+        if mod(ii,col)==0
             RemoveSubplotWhiteArea(gca, row, col, ceil(ii/col), mod(ii,col)+col);
         else
-            RemoveSubplotWhiteArea(gca, row, col, ceil(ii/col), mod(ii,col)); % È¥³ı¿Õ°×²¿·Ö
+            RemoveSubplotWhiteArea(gca, row, col, ceil(ii/col), mod(ii,col)); % å»é™¤ç©ºç™½éƒ¨åˆ†
         end
     %if ii==nvars
-    %    legend(shade,'68%ÖÃĞÅÇø¼ä')
+    %    legend(shade,'68%ç½®ä¿¡åŒºé—´')
     %end
     end
     
