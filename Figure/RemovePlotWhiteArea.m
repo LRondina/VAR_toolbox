@@ -1,26 +1,26 @@
-% RemoveSubplotWhiteArea: È¥³ıPlot»­µÄÍ¼µÄ¿Õ°×²¿·Ö
-% RemovePlotWhiteArea(gca)
-% ÊäÈë
-% gca: axes¾ä±ú
+% RemovePlotWhiteArea: å»é™¤Plotç”»çš„å›¾çš„ç©ºç™½éƒ¨åˆ†
+% usage:add RemovePlotWhiteArea(gca) immediately after you complete your plot
+% è¾“å…¥
+% gca: Axes handle
 
 % author : songxf
 % time   : 2020-03-06
 % email  : 
 
 function [] = RemovePlotWhiteArea(gca)
-% TightInsetµÄÎ»ÖÃ
+% TightInsetçš„ä½ç½®
 inset_vectior = get(gca, 'TightInset');
 inset_x = inset_vectior(1);
 inset_y = inset_vectior(2);
 inset_w = inset_vectior(3);
 inset_h = inset_vectior(4);
 
-% OuterPositionµÄÎ»ÖÃ
+% OuterPositionçš„ä½ç½®
 outer_vector = get(gca, 'OuterPosition');
-pos_new_x = outer_vector(1) + inset_x+0.01; % ½«PositionµÄÔ­µãÒÆµ½µ½TightInsetµÄÔ­µã
+pos_new_x = outer_vector(1) + inset_x+0.01; % å°†Positionçš„åŸç‚¹ç§»åˆ°åˆ°TightInsetçš„åŸç‚¹
 pos_new_y = outer_vector(2) + inset_y+0.01;
-pos_new_w = outer_vector(3) - inset_w - inset_x-0.02; % ÖØÉèPositionµÄ¿í
-pos_new_h = outer_vector(4) - inset_h - inset_y-0.02; % ÖØÉèPositionµÄ¸ß
+pos_new_w = outer_vector(3) - inset_w - inset_x-0.02; % é‡è®¾Positionçš„å®½
+pos_new_h = outer_vector(4) - inset_h - inset_y-0.02; % é‡è®¾Positionçš„é«˜
 
-% ÖØÉèPosition
+% é‡è®¾Position
 set(gca, 'Position', [pos_new_x, pos_new_y, pos_new_w, pos_new_h]);
